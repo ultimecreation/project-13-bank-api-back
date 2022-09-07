@@ -1,0 +1,203 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /transactions/list:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Fetch transactions
+      description: fetch user transactions for the current month
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List retrieved Successfully
+          schema: 
+            $ref: '#/definitions/Transactions'
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal Server Error
+  /transactions/details:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Fetch single transaction
+      description: retrieve data related to one transaction based on its ID
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Fetch single transaction Payload
+          required: true
+          schema:
+            type: object
+            properties:
+              id:   
+                type: number
+                default: 1
+            required:
+              - id
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Single transaction retrieved Successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /transactions/update:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update transaction
+      description: Update single transaction fields
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdateBody'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionUpdateResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /transactions/delete:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionDeleteBody'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionDeleteResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Transactions:
+    type: array
+    items: 
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The transaction ID.
+        transaction:
+          type: string
+          description: The transaction title.
+        transaction_date:
+          type: string
+          description: The transaction date
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+        default: 1
+        description: The transaction ID.
+      transaction:
+        type: string
+        description: The transaction title.
+      transaction_date:
+        type: string
+        description: The transaction date
+  TransactionUpdateBody:
+    properties:
+      category:
+        type: string
+      notes:
+        type: string
+  TransactionUpdateResponse:
+    properties:
+      id:
+        type: integer
+        default: 1
+        description: The transaction ID.
+      transaction:
+        type: string
+        description: The transaction title.
+      transaction_date:
+        type: string
+        description: The transaction date
+      category:
+        type: string
+      notes:
+        type: string
+  TransactionDeleteBody:
+    properties:
+      id:
+        type: number
+        default: 1
+  TransactionDeleteResponse:
+    properties:
+      status:
+        type: string
+        default: "OK"
+
+  
