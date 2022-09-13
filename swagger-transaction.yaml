@@ -143,6 +143,8 @@ definitions:
   Transactions:
     type: array
     items: 
+      description: 
+       /transactions/list (fetch user transactions for the current month).
       type: object
       properties:
         id:
@@ -156,6 +158,8 @@ definitions:
           type: string
           description: The transaction date
   Transaction:
+    description: 
+        /transactions/details (retrieve data related to one transaction based on its ID).
     type: object
     properties:
       id:
@@ -169,6 +173,8 @@ definitions:
         type: string
         description: The transaction date
   TransactionUpdateBody:
+    description: 
+        /transactions/update (Update single transaction fields Body).
     properties:
       id:
         type: number
@@ -178,6 +184,8 @@ definitions:
       notes:
         type: string
   TransactionUpdateResponse:
+    description: 
+        /transactions/update (Update single transaction fields Response).
     properties:
       id:
         type: integer
@@ -194,11 +202,15 @@ definitions:
       notes:
         type: string
   TransactionDeleteBody:
+    description: 
+        /transactions/delete (Delete single transaction optional fields Body).
     properties:
       id:
         type: number
         default: 1
   TransactionDeleteResponse:
+    description: 
+        /transactions/delete (Delete single transaction optional fields Response).
     properties:
       status:
         type: string
