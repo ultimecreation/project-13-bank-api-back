@@ -77,7 +77,7 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Update transaction
+      summary: Update transaction infos
       description: Update single transaction fields
       parameters:
         - in: header
@@ -87,15 +87,15 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update user profile attributes
+          description: Update transaction fields (category, notes))
           required: true
           schema:
             $ref: '#/definitions/TransactionUpdateBody'
       produces:
         - application/json
       responses:
-        '200':
-          description: User profile retrieved successully
+        '200': 
+          description: optional transaction fields updated successully
           schema:
             $ref: '#/definitions/TransactionUpdateResponse'
         '400':
@@ -108,8 +108,8 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: User Profile API
-      description: API for fetching a user profile
+      summary: Delete transaction infos
+      description: Delete optional fields for a specific transaction
       parameters:
         - in: header
           name: Authorization
@@ -118,7 +118,7 @@ paths:
           required: true
         - in: body
           name: body
-          description: Update user profile attributes
+          description: transaction id
           required: true
           schema:
             $ref: '#/definitions/TransactionDeleteBody'
@@ -126,7 +126,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: optional transaction fields deleted successully
           schema:
             $ref: '#/definitions/TransactionDeleteResponse'
         '400':
@@ -147,6 +147,7 @@ definitions:
       properties:
         id:
           type: integer
+          default: 1
           description: The transaction ID.
         transaction:
           type: string
@@ -169,6 +170,9 @@ definitions:
         description: The transaction date
   TransactionUpdateBody:
     properties:
+      id:
+        type: number
+        default: 1
       category:
         type: string
       notes:
@@ -199,5 +203,3 @@ definitions:
       status:
         type: string
         default: "OK"
-
-  
