@@ -16,7 +16,7 @@ paths:
       tags:
         - Transaction Module
       summary: Fetch transactions
-      description: fetch user transactions for the current month
+      description: http://localhost:3001/transactions/list fetch user transactions for the current month
       parameters:
         - in: header
           name: Authorization
@@ -41,7 +41,7 @@ paths:
       tags:
         - Transaction Module
       summary: Fetch single transaction
-      description: retrieve data related to one transaction based on its ID
+      description: http://localhost:3001/transactions/details retrieve data related to one transaction based on its ID
       parameters:
         - in: header
           name: Authorization
@@ -78,7 +78,7 @@ paths:
       tags:
         - Transaction Module
       summary: Update transaction infos
-      description: Update single transaction fields
+      description: http://localhost:3001/transactions/update Update single transaction fields
       parameters:
         - in: header
           name: Authorization
@@ -109,7 +109,7 @@ paths:
       tags:
         - Transaction Module
       summary: Delete transaction infos
-      description: Delete optional fields for a specific transaction
+      description: http://localhost:3001/transactions/delete Delete optional fields for a specific transaction
       parameters:
         - in: header
           name: Authorization
@@ -144,7 +144,7 @@ definitions:
     type: array
     items: 
       description: 
-       /transactions/list (fetch user transactions for the current month).
+       http://localhost:3001/transactions/list (fetch user transactions for the current month).
       type: object
       properties:
         id:
@@ -159,7 +159,7 @@ definitions:
           description: The transaction date
   Transaction:
     description: 
-        /transactions/details (retrieve data related to one transaction based on its ID).
+        http://localhost:3001/transactions/details (retrieve data related to one transaction based on its ID).
     type: object
     properties:
       id:
@@ -174,7 +174,7 @@ definitions:
         description: The transaction date
   TransactionUpdateBody:
     description: 
-        /transactions/update (Update single transaction fields Body).
+        http://localhost:3001/transactions/update (Update single transaction fields Body).
     properties:
       id:
         type: number
@@ -185,7 +185,7 @@ definitions:
         type: string
   TransactionUpdateResponse:
     description: 
-        /transactions/update (Update single transaction fields Response).
+        http://localhost:3001/transactions/update (Update single transaction fields Response).
     properties:
       id:
         type: integer
@@ -203,14 +203,14 @@ definitions:
         type: string
   TransactionDeleteBody:
     description: 
-        /transactions/delete (Delete single transaction optional fields Body).
+        http://localhost:3001/transactions/delete (Delete single transaction optional fields Body).
     properties:
       id:
         type: number
         default: 1
   TransactionDeleteResponse:
     description: 
-        /transactions/delete (Delete single transaction optional fields Response).
+        http://localhost:3001/transactions/delete (Delete single transaction optional fields Response).
     properties:
       status:
         type: string
